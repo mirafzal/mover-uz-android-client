@@ -1,0 +1,1 @@
+# mover-uz-android-client
