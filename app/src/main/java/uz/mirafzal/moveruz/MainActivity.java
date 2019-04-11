@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void initialize() {
-        webview1 = (WebView) findViewById(R.id.webView);
+        webview1 = findViewById(R.id.webView);
         webview1.getSettings().setJavaScriptEnabled(true);
         webview1.getSettings().setSupportZoom(true);
         webview1.setWebViewClient(new WebViewClient() {
@@ -71,15 +71,9 @@ public class MainActivity extends AppCompatActivity{
         WebViewClient webViewClient = new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (url.contains("watch")&&(url.length() == 32)) {
-                    myurl = url.substring(23, 31);
-                    myurl = "https://v.mover.uz/" + myurl + "_m.mp4";
-                    intent.setAction(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(myurl));
-                    startActivity(intent);
-                    view.loadUrl(url);
-                } else if (url.contains("watch")&&(url.length() == 31)) {
-                    myurl = url.substring(23, 30);
+                if (url.contains("watch")) {
+                    if      (url.length() == 32) myurl = url.substring(23, 31);
+                    else if (url.length() == 31) myurl = url.substring(23, 30);
                     myurl = "https://v.mover.uz/" + myurl + "_m.mp4";
                     intent.setAction(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(myurl));
@@ -94,6 +88,11 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onLoadResource(WebView view, String url) {
 //
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
             }
         };
         webview1.setWebViewClient(webViewClient);
