@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Mover.uz</string>
+    <string name="check_internet_connection">Проверьте подключение к интернету!</string>
 </resources>
